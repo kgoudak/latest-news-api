@@ -1,6 +1,7 @@
 package kgoudakos.api.news.service;
 
 import kgoudakos.api.news.model.GeoIP;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,18 +16,23 @@ import java.util.Objects;
 @Service
 public class GeoService {
 
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(GeoService.class);
+
     @Value("${geoIpBaseUrl}")
     private String baseUrl;
 
     private String getIP() {
+        LOGGER.info("Try to determine IP");
         try {
             URL checkIpService = new URL("http://checkip.amazonaws.com");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(checkIpService.openStream()));
             String ipAddress = in.readLine();
-            LoggerFactory.getLogger(GeoService.class).info("IP Address: " + ipAddress);
+            LOGGER.info("IP Address: " + ipAddress);
             return ipAddress;
         } catch (IOException e) {
+            LOGGER.warn("There was an error while obtaining IP info");
             return "8.8.8.8";    // return a default value
         }
     }
