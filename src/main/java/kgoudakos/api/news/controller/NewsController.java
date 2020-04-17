@@ -13,7 +13,7 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-//    @CrossOrigin(origins = "http://localhost:8080")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/")
     public News getNews() {
         return newsService.getNews();
