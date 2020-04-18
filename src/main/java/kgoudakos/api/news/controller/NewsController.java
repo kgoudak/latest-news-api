@@ -5,7 +5,6 @@ import kgoudakos.api.news.service.NewsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +18,6 @@ public class NewsController {
     @Autowired
     private NewsService newsService;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/")
     public News getNews() {
         LOGGER.info("Request received");
