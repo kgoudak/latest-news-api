@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Service
 public class NewsService {
 
@@ -23,9 +25,9 @@ public class NewsService {
     @Autowired
     private GeoService geoService;
 
-    public News getNews() {
+    public News getNews(HttpServletRequest request) {
         RestTemplate restTemplate = new RestTemplate();
-        String countryCode = geoService.getCountryCode();
+        String countryCode = geoService.getCountryCode(request);
         LOGGER.info("Country code: " + countryCode);
 
         String url = String.format(baseUrl, countryCode, apiKey);

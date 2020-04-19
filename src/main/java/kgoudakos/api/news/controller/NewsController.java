@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 public class NewsController {
@@ -19,10 +21,7 @@ public class NewsController {
     private NewsService newsService;
 
     @GetMapping("/")
-    public News getNews() {
-        LOGGER.info("Request received");
-        News news = newsService.getNews();
-        LOGGER.info("Response has : " + news.getTotalResults() + " total results");
-        return news;
+    public News getNews(HttpServletRequest request) {
+        return newsService.getNews(request);
     }
 }
